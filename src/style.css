@@ -1,0 +1,80 @@
+/* Color Palette 
+#81a984 
+#68946c
+#4c7450
+#416044
+#355438
+*/
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  background-color: #355438;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: whitesmoke;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 30px;
+}
+
+.user {
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.content-container {
+  background-color: green;
+  display: flex;
+  flex: 1;
+}
+.sidebar {
+  background-color: #416044;
+  width: 250px;
+}
+
+.content {
+  background-color: #4c7450;
+  flex: 1;
+}
+
+.footer {
+  background-color: #355438;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.to-do-item {
+  height: 100px;
+  background-color: #81a984;
+  /* width: 200px; */
+  margin: 10px;
+  margin: 10px;
+
+  border-radius: 20px;
+}
