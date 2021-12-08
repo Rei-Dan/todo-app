@@ -50,9 +50,18 @@ body {
   display: flex;
   flex: 1;
 }
-.sidebar {
+.sidebar,
+.projects-div,
+.new-project-div {
   background-color: #416044;
   width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-top: 20px;
+  color: whitesmoke;
+  font-weight: bold;
 }
 
 .content {
@@ -70,11 +79,42 @@ body {
 }
 
 .to-do-item {
-  height: 100px;
+  height: 50px;
   background-color: #81a984;
   /* width: 200px; */
   margin: 10px;
   margin: 10px;
-
+  display: flex;
+  flex: row;
   border-radius: 20px;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus-button,
+.submit-todo,
+.delete-button {
+  border: none;
+  background-color: #81a984;
+  color: whitesmoke;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.plus-button:active,
+.submit-todo:active,
+.delete-button:active {
+  color: #355438;
+}
+
+.input {
+  height: 2em;
+  border: none;
+  background-color: #4c7450;
+  width: 100px;
+}
+
+.checked {
+  text-decoration: line-through;
 }

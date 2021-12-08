@@ -1,5 +1,4 @@
-import { loadUI } from "./loadUI";
+import { loadUI } from "./UI";
 import "./style.css";
 
 loadUI.init();
-loadUI.addToDo();
