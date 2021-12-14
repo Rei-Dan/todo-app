@@ -82,8 +82,10 @@ use: ['style-loader', 'css-loader'],
 ## To-Do's
 
 -make fields in todo required.
--make "This week" filter on this weeks tasks.
+Form is not submitted because not connected but functionaly it works. Option is not required, cant set the value to "", possibly due to webpack? (whitespace?)
+-make "This week" filter on this weeks tasks. Done
+-make projects field required
 -make new projects filter on projects with that filter
--figure out how to delete todo's
+-figure out how to delete todo's correctly
 -add local storage
 -think about refactoring code

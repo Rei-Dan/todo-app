@@ -1,29 +1,53 @@
 const toDoStorage = (() => {
   const toDoArray = [
-    //   {
-    //     title: "Test To Do",
-    //     description: "Description of ToDo",
-    //     dueDate: "21/12/2021",
-    //     priority: "Low",
-    //     checked: false,
-    //     project: "",
-    //   },
-    //   {
-    //     title: "Another To Do",
-    //     description: "Lets do Something",
-    //     dueDate: "09/12/2021",
-    //     priority: "High",
-    //     checked: true,
-    //     project: "",
-    //   },
-    //   {
-    //     title: "Another To Do",
-    //     description: "Lets do Something",
-    //     dueDate: "08/01/2022",
-    //     priority: "High",
-    //     checked: true,
-    //     project: "",
-    //   },
+    {
+      title: "Test To Do",
+      description: "Description of ToDo",
+      dueDate: "21/12/2021",
+      priority: "Low",
+      checked: false,
+      project: "",
+    },
+    {
+      title: "Another To Do",
+      description: "Lets do Something",
+      dueDate: "09/12/2021",
+      priority: "High",
+      checked: true,
+      project: "",
+    },
+    {
+      title: "Another To Do",
+      description: "Lets do Something",
+      dueDate: "08/01/2022",
+      priority: "High",
+      checked: true,
+      project: "",
+    },
+    {
+      title: "Test To Do",
+      description: "Description of ToDo",
+      dueDate: "12/12/2021",
+      priority: "Low",
+      checked: false,
+      project: "",
+    },
+    {
+      title: "Another To Do",
+      description: "Lets do Something",
+      dueDate: "20/12/2021",
+      priority: "High",
+      checked: true,
+      project: "",
+    },
+    {
+      title: "Another To Do",
+      description: "Lets do Something",
+      dueDate: "19/12/2022",
+      priority: "High",
+      checked: true,
+      project: "",
+    },
   ];
 
   const output = () => {

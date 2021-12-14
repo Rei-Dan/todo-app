@@ -1,8 +1,7 @@
 import { toDoStorage, projectStorage } from "./StorageController";
 import createNewToDo from "./ToDo";
-import moment from "../node_modules/moment";
 import createNewProject from "./Projects";
-import { parse, format } from "date-fns";
+import { parse, format, endOfWeek, getDayOfYear } from "date-fns";
 
 const loadUI = (() => {
   const toDoArray = toDoStorage.get();
@@ -53,6 +52,8 @@ const loadUI = (() => {
     loadProjects();
   };
 
+  const content = document.querySelector(".content");
+
   const addProject = () => {
     const newProjectInput = document.querySelector(".new-project-input");
     projectStorage.add(createNewProject(newProjectInput.value));
@@ -70,6 +71,8 @@ const loadUI = (() => {
 
   const loadAllToDo = () => {
     for (let i = 0; i < toDoArray.length; i++) {
+      // addToDoTest(i);
+
       const content = document.querySelector(".content");
       const toDoItem = document.createElement("div");
       toDoItem.dataset.todoNumber = i;
@@ -110,6 +113,63 @@ const loadUI = (() => {
         deleteButton
       );
       content.appendChild(toDoItem);
+    }
+    addNewToDo();
+  };
+
+  // const addToDoTest = (i) => {
+  //   console.log(i, content);
+  // };
+
+  const loadThisWeekTodo = () => {
+    const content = document.querySelector(".content");
+    for (let i = 0; i < toDoArray.length; i++) {
+      if (
+        getDayOfYear(parse(toDoArray[i].dueDate, "dd/MM/yyyy", new Date())) <=
+          getDayOfYear(endOfWeek(new Date(), { weekStartsOn: 1 })) &&
+        getDayOfYear(parse(toDoArray[i].dueDate, "dd/MM/yyyy", new Date())) >=
+          getDayOfYear(endOfWeek(new Date(), { weekStartsOn: 1 })) - 6
+      ) {
+        const toDoItem = document.createElement("div");
+        toDoItem.dataset.todoNumber = i;
+        toDoItem.classList.add("to-do-item");
+        const checkbox = document.createElement("input");
+        if (toDoArray[i].checked === true) {
+          checkbox.checked = true;
+          toDoItem.classList.add("checked");
+        }
+        Object.assign(checkbox, { type: "checkbox" });
+        checkbox.addEventListener("click", () => {
+          if (checkbox.checked) {
+            toDoItem.classList.add("checked");
+          } else toDoItem.classList.remove("checked");
+        });
+        const title = document.createElement("div");
+        title.textContent = toDoArray[i].title;
+        const description = document.createElement("div");
+        description.textContent = toDoArray[i].description;
+        const dueDate = document.createElement("div");
+        dueDate.textContent = toDoArray[i].dueDate;
+        const priority = document.createElement("div");
+        priority.textContent = toDoArray[i].priority;
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "&times";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", () => {
+          toDoStorage.remove(deleteButton.parentNode.dataset.todonumber);
+          clearContent();
+          loadAllToDo();
+        });
+        toDoItem.append(
+          checkbox,
+          title,
+          description,
+          dueDate,
+          priority,
+          deleteButton
+        );
+        content.appendChild(toDoItem);
+      }
     }
     addNewToDo();
   };
@@ -173,6 +233,11 @@ const loadUI = (() => {
           clearContent();
           loadTodayTodo();
         });
+      } else if (projects[i].title === "This Week") {
+        project.addEventListener("click", () => {
+          clearContent();
+          loadThisWeekTodo();
+        });
       } else if (projects[i].title === "All To-Do's") {
         project.addEventListener("click", () => {
           clearContent();
@@ -195,11 +260,17 @@ const loadUI = (() => {
     content.appendChild(toDoItem);
     plus.addEventListener("click", () => {
       toDoItem.removeChild(plus);
+      const toDoForm = document.createElement("form");
+      toDoForm.classList.add("to-do-form");
       const titleLabel = document.createElement("label");
       titleLabel.setAttribute("for", "title");
       titleLabel.textContent = "Title:";
       const inputTitle = document.createElement("input");
-      Object.assign(inputTitle, { id: "title", type: "text" });
+      Object.assign(inputTitle, {
+        id: "title",
+        type: "text",
+        required: "required",
+      });
       inputTitle.classList.add("input");
       const descLabel = document.createElement("label");
       descLabel.setAttribute("for", "description");
@@ -213,15 +284,25 @@ const loadUI = (() => {
       Object.assign(inputDueDate, {
         id: "input-due-date",
         type: "date",
+        required: "required",
       });
       inputDueDate.classList.add("input");
       const priorityLabel = document.createElement("label");
       priorityLabel.setAttribute("for", "priority");
       priorityLabel.textContent = "Priority:";
       const inputPriority = document.createElement("select");
+      inputPriority.classList.add("input");
+      Object.assign(inputPriority, {
+        id: "input-priority",
+        required: "required",
+      });
       const noSelect = document.createElement("option");
-      noSelect.textContent = "";
-      Object.assign(noSelect, { value: "" });
+      noSelect.textContent = "Choose";
+      Object.assign(noSelect, {
+        selected: "selected",
+        disabled: "disabled",
+      });
+      noSelect.setAttribute("value", "");
       const lowSelect = document.createElement("option");
       lowSelect.textContent = "Low";
       Object.assign(lowSelect, { value: "Low" });
@@ -232,10 +313,11 @@ const loadUI = (() => {
       highSelect.textContent = "High";
       Object.assign(highSelect, { value: "High" });
       inputPriority.append(noSelect, lowSelect, mediumSelect, highSelect);
-      inputPriority.classList.add("input");
+
       const submitButton = document.createElement("button");
       submitButton.textContent = "Add";
       submitButton.classList.add("submit-todo");
+      Object.assign(submitButton, { type: "submit" });
       submitButton.addEventListener("click", () => {
         toDoStorage.add(
           createNewToDo(
@@ -245,10 +327,11 @@ const loadUI = (() => {
             inputPriority.value
           )
         );
-        clearContent();
+        clearContent(content);
         loadAllToDo();
       });
-      toDoItem.append(
+      toDoItem.append(toDoForm);
+      toDoForm.append(
         titleLabel,
         inputTitle,
         descLabel,
