@@ -6,7 +6,7 @@ const toDoStorage = (() => {
       dueDate: "21/12/2021",
       priority: "Low",
       checked: false,
-      project: "",
+      project: "Test",
     },
     {
       title: "Another To Do",
@@ -14,7 +14,7 @@ const toDoStorage = (() => {
       dueDate: "09/12/2021",
       priority: "High",
       checked: true,
-      project: "",
+      project: "Test2",
     },
     {
       title: "Another To Do",
@@ -30,7 +30,7 @@ const toDoStorage = (() => {
       dueDate: "12/12/2021",
       priority: "Low",
       checked: false,
-      project: "",
+      project: "Test",
     },
     {
       title: "Another To Do",
@@ -46,13 +46,9 @@ const toDoStorage = (() => {
       dueDate: "19/12/2022",
       priority: "High",
       checked: true,
-      project: "",
+      project: "Test2",
     },
   ];
-
-  const output = () => {
-    console.log(toDoArray);
-  };
 
   const get = () => {
     return toDoArray;
@@ -65,7 +61,7 @@ const toDoStorage = (() => {
   const remove = (arrayitem) => {
     toDoArray.splice(arrayitem, 1);
   };
-  return { get, add, output, remove };
+  return { get, add, remove };
 })();
 
 const projectStorage = (() => {
@@ -73,11 +69,9 @@ const projectStorage = (() => {
     { title: "All To-Do's" },
     { title: "Today" },
     { title: "This Week" },
+    { title: "Test" },
+    { title: "Test2" },
   ];
-
-  const console = () => {
-    console.log(toDoArray);
-  };
 
   const get = () => {
     return projectStorageArray;

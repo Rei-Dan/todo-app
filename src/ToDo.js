@@ -5,11 +5,11 @@ export default function createNewToDo(
   description,
   dueDate,
   priority,
-  checked,
-  project
+  project,
+  checked
 ) {
   class toDoItem {
-    constructor(title, description, dueDate, priority, checked, project) {
+    constructor(title, description, dueDate, priority, project, checked) {
       this.title = title;
       this.description = description;
       this.dueDate = format(
@@ -17,8 +17,8 @@ export default function createNewToDo(
         "dd/MM/yyyy"
       );
       this.priority = priority;
-      this.checked = false;
       this.project = project;
+      this.checked = false;
     }
     check = () => {
       if (this.checked === false) {
@@ -26,5 +26,5 @@ export default function createNewToDo(
       } else this.checked = false;
     };
   }
-  return new toDoItem(title, description, dueDate, priority, checked, project);
+  return new toDoItem(title, description, dueDate, priority, project, checked);
 }
