@@ -1,3 +1,5 @@
+import { format, parse } from "date-fns";
+
 export default function createNewToDo(
   title,
   description,
@@ -10,7 +12,10 @@ export default function createNewToDo(
     constructor(title, description, dueDate, priority, checked, project) {
       this.title = title;
       this.description = description;
-      this.dueDate = dueDate;
+      this.dueDate = format(
+        parse(dueDate, "yyyy-MM-dd", new Date()),
+        "dd/MM/yyyy"
+      );
       this.priority = priority;
       this.checked = false;
       this.project = project;

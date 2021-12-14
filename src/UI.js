@@ -2,6 +2,7 @@ import { toDoStorage, projectStorage } from "./StorageController";
 import createNewToDo from "./ToDo";
 import moment from "../node_modules/moment";
 import createNewProject from "./Projects";
+import { parse, format } from "date-fns";
 
 const loadUI = (() => {
   const toDoArray = toDoStorage.get();
@@ -116,7 +117,7 @@ const loadUI = (() => {
   const loadTodayTodo = () => {
     const content = document.querySelector(".content");
     for (let i = 0; i < toDoArray.length; i++) {
-      if (toDoArray[i].dueDate === moment().format("L")) {
+      if (toDoArray[i].dueDate === format(new Date(), "dd/MM/yyyy")) {
         const toDoItem = document.createElement("div");
         toDoItem.dataset.todoNumber = i;
         toDoItem.classList.add("to-do-item");

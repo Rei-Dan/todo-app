@@ -78,3 +78,12 @@ use: ['style-loader', 'css-loader'],
 ]
 }
 }
+
+## To-Do's
+
+-make fields in todo required.
+-make "This week" filter on this weeks tasks.
+-make new projects filter on projects with that filter
+-figure out how to delete todo's
+-add local storage
+-think about refactoring code
